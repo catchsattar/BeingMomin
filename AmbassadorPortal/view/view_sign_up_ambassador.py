@@ -27,7 +27,7 @@ def view_sign_up_ambassador(request):
         qualification = body['qualification']
         address = body['address']
 
-        user = User.objects.create_user(username= mobile_number, password="grampower",
+        user = User.objects.create_user(username= mobile_number, password="samdroid",
                                         mobile_no=mobile_number , email=email,
                                         first_name=full_name.split()[0],last_name=full_name.split()[1],
                                         qualification=qualification,address=address)

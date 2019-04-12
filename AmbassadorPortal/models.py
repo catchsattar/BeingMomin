@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 
-User.add_to_class('mobile_no', models.CharField(max_length=13, blank=False, unique=True))
-User.add_to_class('qualification', models.CharField(max_length=400))
+User.add_to_class('mobile_no', models.CharField(max_length=13, default=None, blank=False, unique=True))
+User.add_to_class('qualification', models.CharField(max_length=400, default=None))
 User.add_to_class('address', models.TextField(max_length=500, blank=True))
 User.add_to_class('mobile_verified', models.BooleanField(default=False))
 User.add_to_class('finalized', models.BooleanField(default=False))
@@ -34,6 +34,9 @@ class people(models.Model):
     life_partner_id = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True,blank=True)
     updated_at = models.DateTimeField(auto_now=True,blank=True)
+    class Meta(object):
+        managed = False
+        db_table = 'AmbassadorPortal_people'
 
 
 
@@ -46,7 +49,8 @@ class locality_mapping(models.Model):
     state = models.CharField(max_length=400)
     class Meta(object):
         managed = False
-        db_table = 'SocietyApp_locality_mapping'
+        db_table = 'AmbassadorPortal_locality_mapping'
+
 
 
 

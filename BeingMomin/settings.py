@@ -25,7 +25,7 @@ SECRET_KEY = 'd1tq&t_@gz$c+066cxdhiqgz)@&7^*^b%wi0bypg76)457dq!8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','192.168.0.126','192.168.2.170']
+ALLOWED_HOSTS = ['localhost','127.0.0.1', '0.0.0.0','172.20.5.80','192.168.8.8']
 
 
 # Application definition
@@ -92,9 +92,9 @@ WSGI_APPLICATION = 'BeingMomin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db_society',
+        'NAME': 'db_beingmomin',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'samdroid',
         'HOST': '',
         'PORT': '',
     }
