@@ -9,6 +9,8 @@ import logging
 import traceback
 
 from datetime import datetime
+
+from django.conf import Settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -17,6 +19,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework_jwt.serializers import jwt_payload_handler, jwt_encode_handler
 
 from AmbassadorPortal.models import locality_mapping
+from BeingMomin import settings
 
 logger = logging.getLogger('django')
 
@@ -50,7 +53,7 @@ def view_sign_in(request):
                 user = User.objects.get(username=username)
                 # Generating token for access another view.
                 payload = jwt_payload_handler(user)
-                token = jwt_encode_handler(payload)
+                token = jwt_encode_handler(payload,settings.SECRET_KEY)
                 response["Token"] = token
 
             else:

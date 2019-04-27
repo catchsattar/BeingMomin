@@ -16,9 +16,20 @@ User.add_to_class('profile_pic',  models.CharField(max_length=400, default="/med
 
 
 
+class locality_mapping(models.Model):
+    id = models.AutoField(auto_created=True, primary_key=True)
+    user = models.ForeignKey(User)
+    locality_key = models.CharField(max_length=400)
+    tahsil = models.CharField(max_length=400)
+    district = models.CharField(max_length=400)
+    state = models.CharField(max_length=400)
+    class Meta(object):
+        db_table = 'AmbassadorPortal_locality_mapping'
+
 class people(models.Model):
-    name = models.CharField(max_length=300),
-    dob = models.CharField(max_length=15)
+    id = models.AutoField(auto_created=True, primary_key=True)
+    name = models.CharField(max_length=300, default="")
+    dob = models.DateField()
     mobile = models.CharField(max_length=10)
     email = models.CharField(max_length=200)
     gender = models.CharField(max_length=7)
@@ -26,7 +37,7 @@ class people(models.Model):
     profession = models.CharField(max_length=100)
     education_key = models.CharField(max_length=40)
     education_details = models.TextField()
-    address_key = models.CharField(max_length=50)
+    locality = models.ForeignKey(locality_mapping , default=1)
     alive_flag = models.BooleanField()
     father_id = models.IntegerField()
     mother_id = models.IntegerField()
@@ -35,21 +46,9 @@ class people(models.Model):
     created_at = models.DateTimeField(auto_now_add=True,blank=True)
     updated_at = models.DateTimeField(auto_now=True,blank=True)
     class Meta(object):
-        managed = False
         db_table = 'AmbassadorPortal_people'
 
 
-
-
-class locality_mapping(models.Model):
-    user = models.ForeignKey(User)
-    locality_key = models.CharField(max_length=400)
-    tahsil = models.CharField(max_length=400)
-    district = models.CharField(max_length=400)
-    state = models.CharField(max_length=400)
-    class Meta(object):
-        managed = False
-        db_table = 'AmbassadorPortal_locality_mapping'
 
 
 

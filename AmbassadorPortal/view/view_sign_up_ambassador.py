@@ -36,8 +36,7 @@ def view_sign_up_ambassador(request):
 
     except Exception as e:
      response = {"Status": 1}
-     logger.error(
-        "Body of Request is'{0}' and Exception is '{1}'".format(body, e), exc_info=True)
+     logger.error("Body of Request is'{0}' and Exception is '{1}'".format(body, e), exc_info=True)
 
 
     return HttpResponse(json.dumps(response), content_type='application/json')

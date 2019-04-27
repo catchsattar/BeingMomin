@@ -23,7 +23,6 @@ def view_locality_ambassadors(request):
         locality_list = locality_mapping.objects.values('locality_key', 'tahsil', 'district', 'state',
                                                         'user__first_name', 'user__last_name', 'user__mobile_no',
                                                         'user__email', 'user__address', 'user__profile_pic')
-
         ambassadors=[]
 
         ambssadorList=list(locality_list)

@@ -8,7 +8,8 @@ urlpatterns = [
 
     url(r'^sign-up-ambassador$', views.sign_up_ambassador, name="registration"),
     url(r'^sign-in$', views.sign_in, name="sign-in"),
-    url(r'^locality-ambassadors$', views.locality_ambassadors, name="localityambassadors")
+    url(r'^locality-ambassadors$', views.locality_ambassadors, name="localityambassadors"),
+    url(r'^search-person$', views.search_person, name="searchperson")
     # url(r'^home$', views.home, name="home"),
     # url(r'^ambassadorhome$', views.amb_home, name="ambassadorhome"),
     # url(r'^newperson$', views.newperson, name="newperson"),
