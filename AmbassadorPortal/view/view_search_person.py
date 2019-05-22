@@ -40,11 +40,16 @@ def view_search_person(request):
         persons_list = list(persons_array)
 
         for person in persons_list:
+
+            if person["father_id"]==0:
+              father_name=""
+            else:
+              father_name= get_person_from_id(person["father_id"]).name
             personDict = {
                 "id":person["id"],
                 "name": person["name"],
                 "locality" : person["locality__locality_key"],
-                "father":  get_person_from_id(person["father_id"]).name
+                "father": father_name
             }
             persons.append(personDict)
 

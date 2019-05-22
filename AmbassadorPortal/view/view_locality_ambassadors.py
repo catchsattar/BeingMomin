@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 
 from AmbassadorPortal.models import locality_mapping
+from BeingMomin import config
 
 logger = logging.getLogger('django')
 
@@ -29,11 +30,11 @@ def view_locality_ambassadors(request):
         for amb in ambssadorList :
             ambDict= {
                 "localityKey":amb["locality_key"],
-                "name": amb["user__first_name"]+amb["user__last_name"],
+                "name": amb["user__first_name"]+" "+amb["user__last_name"],
                 "mobileNo": amb["user__mobile_no"],
                 "email": amb["user__email"],
                 "address": amb["user__address"],
-                "profilePic": amb["user__profile_pic"],
+                "profilePic": config.BASE_URL+amb["user__profile_pic"],
                 "tahsil": amb["tahsil"],
                 "district": amb["district"],
                 "state": amb["state"]

@@ -53,7 +53,7 @@ def view_sign_in(request):
                 user = User.objects.get(username=username)
                 # Generating token for access another view.
                 payload = jwt_payload_handler(user)
-                token = jwt_encode_handler(payload,settings.SECRET_KEY)
+                token = jwt_encode_handler(payload)
                 response["Token"] = token
 
             else:

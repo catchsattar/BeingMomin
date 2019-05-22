@@ -12,7 +12,7 @@ User.add_to_class('qualification', models.CharField(max_length=400, default=None
 User.add_to_class('address', models.TextField(max_length=500, blank=True))
 User.add_to_class('mobile_verified', models.BooleanField(default=False))
 User.add_to_class('finalized', models.BooleanField(default=False))
-User.add_to_class('profile_pic',  models.CharField(max_length=400, default="/media/images/profiles/default_profile_pic.png"))
+User.add_to_class('profile_pic',  models.CharField(max_length=400, default="/BeingMomin/media/images/profiles/default_profile.jpg"))
 
 
 
@@ -41,7 +41,7 @@ class people(models.Model):
     alive_flag = models.BooleanField()
     father_id = models.IntegerField()
     mother_id = models.IntegerField()
-    profile_pic = models.ImageField(upload_to='media/images/profiles/', default='media/images/profiles/default.png', blank=True )
+    profile_pic = models.ImageField(upload_to='BeingMomin/media/images/profiles/', default='/BeingMomin/media/images/profiles/default_profile.jpg', blank=True )
     life_partner_id = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True,blank=True)
     updated_at = models.DateTimeField(auto_now=True,blank=True)
