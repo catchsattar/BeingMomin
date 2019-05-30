@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 
+from AmbassadorPortal.view.view_get_families import view_get_families
 from AmbassadorPortal.view.view_get_localities import view_get_localities
 from view.view_add_person import view_add_person
 from view.view_sign_up_ambassador import view_sign_up_ambassador
@@ -37,8 +38,13 @@ def search_person(request):
 def add_person(request):
     return view_add_person(request)
 
+@csrf_exempt
 def get_localities(request):
     return view_get_localities(request)
+
+@csrf_exempt
+def get_families(request):
+    return view_get_families(request)
 
 
 

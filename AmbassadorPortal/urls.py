@@ -13,11 +13,11 @@ urlpatterns = [
     # url(r'^home$', views.home, name="home"),
     # url(r'^ambassadorhome$', views.amb_home, name="ambassadorhome"),
      url(r'^add-person$', views.add_person, name="addperson"),
-     url(r'^get-localities$', views.get_localities, name="getlocalities")
+     url(r'^get-localities$', views.get_localities, name="getlocalities"),
     # url(r'^searchparent$', views.get_parent, name="searchparent"),
     # url(r'^newsenter$', views.news_entry, name="newsenter"),
     # url(r'^profile$', views.ambassador_profile, name="profile"),
-    # url(r'^families$', views.get_families, name="families"),
+     url(r'^families$', views.get_families, name="families")
     # url(r'^showhierarchy$', views.show_hierarchy, name="showhierarchy"),
 
 

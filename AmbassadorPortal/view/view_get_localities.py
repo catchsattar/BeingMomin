@@ -20,12 +20,26 @@ def view_get_localities(request):
     body = None
 
     try:
-        response["Status"] = 0
-        locality_list = locality_mapping.objects.all().values_list('locality_key',flat=True)
-        response["localities"]= list(locality_list)
+        response["status"] = 0
+        # locality_list = locality_mapping.objects.all().values_list('locality_key', flat=True)
+        locality_list = locality_mapping.objects.values('id','locality_key')
+
+        localities = []
+        locality_list = list(locality_list)
+
+        for locality in locality_list:
+            locality_dict = {
+                "localityId" : locality["id"],
+                "localityName": locality["locality_key"]
+            }
+            localities.append(locality_dict)
+
+        response["localities"]= localities
+
+        print(response)
 
     except Exception as e:
-     response = {"Status": 1}
+     response = {"status": 1}
      logger.error("Body of Request is'{0}' and Exception is '{1}'".format(body, e), exc_info=True)
 
 

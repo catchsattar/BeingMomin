@@ -33,8 +33,17 @@ def view_search_person(request):
 
         response["Status"] = 0
 
-        persons_array = people.objects.filter(name__icontains=search_name, gender=gender,
-                                              locality_id__locality_key= locality).values('id','name','locality__locality_key','father_id')
+        if(locality.__len__()!=0 & gender.__len__()!=0 ):
+          persons_array = people.objects.filter(name__icontains=search_name, gender=gender,
+                                               locality_id__locality_key= locality).values('id','name','locality__locality_key','father_id')
+        elif (locality.__len__() == 0 & gender.__len__() != 0):
+          persons_array = people.objects.filter(name__icontains=search_name, gender=gender).values('id', 'name','locality__locality_key','father_id')
+
+        elif (locality.__len__() != 0 & gender.__len__() == 0):
+            persons_array = people.objects.filter(name__icontains=search_name, locality_id__locality_key=locality).values('id', 'name', 'locality__locality_key','father_id')
+
+        elif (locality.__len__() == 0 & gender.__len__() == 0):
+            persons_array = people.objects.filter(name__icontains=search_name).values('id', 'name', 'locality__locality_key','father_id')
 
         persons = []
         persons_list = list(persons_array)
