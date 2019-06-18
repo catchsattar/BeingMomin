@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 
+
+from AmbassadorPortal.view.view_get_family_hierachy import view_get_family_hierachy
 from AmbassadorPortal.view.view_get_families import view_get_families
 from AmbassadorPortal.view.view_get_localities import view_get_localities
 from view.view_add_person import view_add_person
@@ -46,5 +48,9 @@ def get_localities(request):
 def get_families(request):
     return view_get_families(request)
 
+
+@csrf_exempt
+def get_family_hierarchy(request):
+    return view_get_family_hierachy(request)
 
 

@@ -17,8 +17,8 @@ urlpatterns = [
     # url(r'^searchparent$', views.get_parent, name="searchparent"),
     # url(r'^newsenter$', views.news_entry, name="newsenter"),
     # url(r'^profile$', views.ambassador_profile, name="profile"),
-     url(r'^families$', views.get_families, name="families")
-    # url(r'^showhierarchy$', views.show_hierarchy, name="showhierarchy"),
+     url(r'^get-families$', views.get_families, name="families"),
+     url(r'^get-family-hierarchy$', views.get_family_hierarchy, name="get-familty-hierarchy")
 
 
 ]

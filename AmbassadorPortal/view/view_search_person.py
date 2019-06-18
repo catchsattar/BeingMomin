@@ -10,6 +10,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from AmbassadorPortal.models import people
 from portal_utils import get_person_from_id
+from django.db.models import Q
 
 logger = logging.getLogger('django')
 
@@ -31,11 +32,18 @@ def view_search_person(request):
         locality = body['locality']
         gender = body['gender']
 
+        print("gender : "+gender)
+        print("locality : "+locality)
+
         response["Status"] = 0
 
+        con1= Q(name__icontains=search_name)
+        con2 = Q(gender=gender)
+        con3 = Q(locality_id__locality_key= locality)
+
         if(locality.__len__()!=0 & gender.__len__()!=0 ):
-          persons_array = people.objects.filter(name__icontains=search_name, gender=gender,
-                                               locality_id__locality_key= locality).values('id','name','locality__locality_key','father_id')
+          persons_array = people.objects.filter(con1 & con2
+                                                & con3).values('id','name','locality__locality_key','father_id')
         elif (locality.__len__() == 0 & gender.__len__() != 0):
           persons_array = people.objects.filter(name__icontains=search_name, gender=gender).values('id', 'name','locality__locality_key','father_id')
 
