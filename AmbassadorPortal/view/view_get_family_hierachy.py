@@ -31,7 +31,7 @@ def view_get_family_hierachy(request):
         person_id = body['personId']
         response["status"] = 0
 
-        response["data"]= get_person_info(person_id)
+        response["data"]= get_person_info(0, person_id)
 
     except Exception as e:
      response = {"status": 1}
@@ -41,16 +41,18 @@ def view_get_family_hierachy(request):
     return HttpResponse(json.dumps(response), content_type='application/json')
 
 
-def get_person_info(person_id):
+def get_person_info(father_id, person_id):
     person_info = {}
     person = get_person_from_id(person_id)
+    person_info["personId"] = person.id
+    person_info["fatherId"] = father_id
     person_info["name"]= person.name
     person_info["gender"] = person.gender
     if person.gender == "Male" :
       if person.life_partner_id is not  None:
          person_info["wifeName"]=get_person_name_from_id(person.life_partner_id)
 
-      person_info["children"]= get_children(person_id)
+      person_info["children"]= get_children(person.id)
 
     return person_info
 
@@ -60,7 +62,7 @@ def get_children(person_id):
     children_array = people.objects.filter(father_id=person_id).values('id')
     list_of_children = list(children_array)
     for child in list_of_children :
-        children.append(get_person_info(child["id"]))
+        children.append(get_person_info(person_id,child["id"]))
 
     return children
 

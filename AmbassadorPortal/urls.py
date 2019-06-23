@@ -18,7 +18,8 @@ urlpatterns = [
     # url(r'^newsenter$', views.news_entry, name="newsenter"),
     # url(r'^profile$', views.ambassador_profile, name="profile"),
      url(r'^get-families$', views.get_families, name="families"),
-     url(r'^get-family-hierarchy$', views.get_family_hierarchy, name="get-familty-hierarchy")
+     url(r'^get-family-hierarchy$', views.get_family_hierarchy, name="get-familty-hierarchy"),
+     url(r'^get-detailed-person$', views.get_detailed_person, name="get-detailed-person")
 
 
 ]
