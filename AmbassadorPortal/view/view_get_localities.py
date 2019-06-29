@@ -36,8 +36,6 @@ def view_get_localities(request):
 
         response["localities"]= localities
 
-        print(response)
-
     except Exception as e:
      response = {"status": 1}
      logger.error("Body of Request is'{0}' and Exception is '{1}'".format(body, e), exc_info=True)

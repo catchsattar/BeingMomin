@@ -47,7 +47,9 @@ def get_person_info(person_id):
     # person_info["personId"] = person.id
     # person_info["fatherId"] = father_id
     person_info["name"] = person.name
-    person_info["profilePicUrl"] = config.BASE_URL + str(person.profile_pic)
+    profile_url= str(person.profile_pic)
+    if len(profile_url) > 0 :
+       person_info["profilePicUrl"] = config.BASE_URL + profile_url
     person_info["gender"] = person.gender
     person_info["maritalStatus"] = person.marital_status
     person_info["profession"] = person.profession
@@ -71,7 +73,7 @@ def get_person_info(person_id):
     if person.dob is not None :
         dobDetail = {}
         dobDetail["order"] = 3
-        dobDetail["info"] = "Born on " + str(person.dob)
+        dobDetail["info"] = "Born on " + person.dob.strftime("%d %b, %Y")
         extra_details.append(dobDetail)
 
     if person.locality_id is not None:
@@ -111,26 +113,36 @@ def get_person_info(person_id):
         mother_detail["name"] = "Not recorded"
     close_ones.append(mother_detail)
 
-    partner_detail = {}
-    partner_detail["order"] = 3
-    if person.life_partner_id is not None and person.life_partner_id != 0:
-        partner_detail["id"] = person.life_partner_id
-        partner_detail["name"] = get_person_name_from_id(person.life_partner_id)
-        if person.gender == "Male":
-            partner_detail["relation"] = "Wife"
+    if person.marital_status != "Single" :
+        partner_detail = {}
+        partner_detail["order"] = 3
+        if person.life_partner_id is not None and person.life_partner_id != 0:
+            partner_detail["id"] = person.life_partner_id
+            partner_detail["name"] = get_person_name_from_id(person.life_partner_id)
+            if person.gender == "Male":
+                partner_detail["relation"] = "Wife"
+            else:
+                partner_detail["relation"] = "Husband"
         else:
-            partner_detail["relation"] = "Husband"
-    else:
-        partner_detail["id"] = 0
-        partner_detail["name"] = "Not recorded"
-        partner_detail["relation"] = "life partner"
+            partner_detail["id"] = 0
+            partner_detail["name"] = "Not recorded"
+            partner_detail["relation"] = "life partner"
 
-    close_ones.append(partner_detail)
+        close_ones.append(partner_detail)
+
     close_ones_obj["members"] = close_ones
 
     relations.append(close_ones_obj)
-    relations.append(get_siblings(person.father_id))
-    relations.append(get_children(person_id))
+
+    if person.father_id!=0 :
+        sibling_obj, siblings_count = get_siblings(person.id, person.father_id)
+        if siblings_count > 0 :
+            relations.append(sibling_obj)
+
+    children_obj, children_count = get_children(person_id)
+    if children_count > 0 :
+        relations.append(children_obj)
+
     person_info["family"]= relations
 
     return person_info
@@ -154,10 +166,10 @@ def get_children(person_id):
         children.append(child)
     children_detail_obj["members"] = children
 
-    return children_detail_obj
+    return children_detail_obj, len(children)
 
 
-def get_siblings(father_id):
+def get_siblings(person_id, father_id):
     sibling_detail_obj={}
     sibling_detail_obj["order"]=2
     sibling_detail_obj["group"]="Siblings"
@@ -167,13 +179,14 @@ def get_siblings(father_id):
     list_of_siblings= list(siblings_array)
 
     for index,sibling in enumerate(list_of_siblings) :
-        if sibling["gender"] == "Male":
-            sibling["relation"] = "Brother"
-        else:
-            sibling["relation"] = "Sister"
-        del sibling["gender"]
-        sibling["order"]= index
-        siblings.append(sibling)
+        if sibling["id"] != person_id :
+            if sibling["gender"] == "Male":
+                sibling["relation"] = "Brother"
+            else:
+                sibling["relation"] = "Sister"
+            del sibling["gender"]
+            sibling["order"]= index
+            siblings.append(sibling)
 
     sibling_detail_obj["members"]= siblings
-    return sibling_detail_obj
+    return sibling_detail_obj, len(siblings)

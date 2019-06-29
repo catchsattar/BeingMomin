@@ -49,8 +49,9 @@ def get_person_info(father_id, person_id):
     person_info["name"]= person.name
     person_info["gender"] = person.gender
     if person.gender == "Male" :
-      if person.life_partner_id is not  None:
+      if person.life_partner_id is not  None and person.life_partner_id != 0 :
          person_info["wifeName"]=get_person_name_from_id(person.life_partner_id)
+         person_info["wifeId"] = person.life_partner_id
 
       person_info["children"]= get_children(person.id)
 
