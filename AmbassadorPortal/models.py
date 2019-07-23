@@ -49,6 +49,23 @@ class people(models.Model):
         db_table = 'AmbassadorPortal_people'
 
 
+class news_room(models.Model):
+    id = models.AutoField(auto_created=True, primary_key=True)
+    locality = models.ForeignKey(locality_mapping, default=1)
+    news_date = models.DateField()
+    news_title = models.CharField(max_length=400)
+    news_description = models.TextField()
+    news_category = models.CharField(max_length=400)
+    new_attachment = models.ImageField(upload_to='BeingMomin/media/images/news_attachment/', blank=True )
+    verified  = models.BooleanField()
+    currently_show = models.BooleanField()
+    user = models.ForeignKey(User)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True)
+
+
+
+
 
 
 
