@@ -17,12 +17,12 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
 
-from BeingMomin import settings
+from BeingMomin.settings import base
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^AmbassadorPortal/', include('AmbassadorPortal.urls'))
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if base.DEBUG:
+    urlpatterns += static(base.MEDIA_URL, document_root=base.MEDIA_ROOT)
 

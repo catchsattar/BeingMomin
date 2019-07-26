@@ -6,11 +6,7 @@ import ast
 import json
 
 import logging
-import traceback
 
-from datetime import datetime
-
-from django.conf import Settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -19,7 +15,6 @@ from rest_framework.permissions import AllowAny
 from rest_framework_jwt.serializers import jwt_payload_handler, jwt_encode_handler
 
 from AmbassadorPortal.models import locality_mapping
-from BeingMomin import settings
 
 logger = logging.getLogger('django')
 

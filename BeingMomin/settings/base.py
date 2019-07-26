@@ -27,7 +27,7 @@ SECRET_KEY = 'd1tq&t_@gz$c+066cxdhiqgz)@&7^*^b%wi0bypg76)457dq!8'
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1', '0.0.0.0','172.20.5.184','192.168.2.12']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -154,4 +154,4 @@ USE_TZ = True
 STATICFILES_DIRS = ( os.path.join(BASE_DIR, "static"), )
 STATIC_URL = '/BeingMomin/static/'
 MEDIA_URL = '/BeingMomin/media/images/profiles/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/images/profiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/images/../../media/images/profiles')
