@@ -104,8 +104,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_beingmomin',
-        'USER': 'samserver',
-        'PASSWORD': 'samdroid',
+        'USER': 'ubuntu',
+        'PASSWORD': 'ubuntu',
         'HOST': '',
         'PORT': '',
     }
