@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'd1tq&t_@gz$c+066cxdhiqgz)@&7^*^b%wi0bypg76)457dq!8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['*']
@@ -101,7 +101,15 @@ WSGI_APPLICATION = 'BeingMomin.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'db_beingmomin',
+        'USER': 'admin',
+        'PASSWORD': 's79826919952m',
+        'HOST': 'instance-beingmomin.cicboind5bel.ap-south-1.rds.amazonaws.com',
+        'PORT': '3306',
+    },
+    'dev': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_beingmomin',
         'USER': 'ubuntu',
