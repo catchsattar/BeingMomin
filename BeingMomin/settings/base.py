@@ -14,6 +14,8 @@ import os
 import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from BeingMomin import config
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -40,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'AmbassadorPortal.apps.AmbassadorportalConfig',
-    'rest_framework'
+    'rest_framework',
+    'storages'
 ]
 
 
@@ -153,13 +156,23 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
+if config.CURRENT_ENV == 'PRODUCTION':
+    AWS_ACCESS_KEY_ID = 'AKIATAHCQNJCJARIRYHN'
+    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_STORAGE_BUCKET_NAME = 'being-momin-s3-bucket'
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
+    AWS_LOCATION = 'static'
 
-# STATIC_URL = '/static/'
+    STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DEFAULT_FILE_STORAGE = 'BeingMomin.settings.storage_backends.MediaStorage'
 
+else:
+    STATICFILES_DIRS = ( os.path.join(BASE_DIR, "static"), )
+    STATIC_URL = '/BeingMomin/static/'
+    MEDIA_URL = '/BeingMomin/media/images/profiles/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/images/../../media/images/profiles')
 
-STATICFILES_DIRS = ( os.path.join(BASE_DIR, "static"), )
-STATIC_URL = '/BeingMomin/static/'
-MEDIA_URL = '/BeingMomin/media/images/profiles/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/images/../../media/images/profiles')
