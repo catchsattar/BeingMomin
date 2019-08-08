@@ -44,6 +44,9 @@ def view_sign_in(request):
                 response["Status"] = 0
                 response['Username'] = username
                 response['Locality'] = key
+                response['UserId']= (list(user_obj)[0]).id
+                response['LocalityId'] = locality_obj.id
+
 
                 user = User.objects.get(username=username)
                 # Generating token for access another view.

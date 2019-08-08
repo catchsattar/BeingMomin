@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'd1tq&t_@gz$c+066cxdhiqgz)@&7^*^b%wi0bypg76)457dq!8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*']
@@ -107,16 +107,16 @@ DATABASES = {
 'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_beingmomin',
-        'USER': 'admin',
-        'PASSWORD': 's79826919952m',
-        'HOST': 'instance-beingmomin.cicboind5bel.ap-south-1.rds.amazonaws.com',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
         'PORT': '3306',
     },
     'dev': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_beingmomin',
-        'USER': 'ubuntu',
-        'PASSWORD': 'ubuntu',
+        'USER': 'root',
+        'PASSWORD': 'samdroid',
         'HOST': '',
         'PORT': '',
     }
@@ -157,8 +157,8 @@ USE_TZ = True
 
 
 if config.CURRENT_ENV == 'PRODUCTION':
-    AWS_ACCESS_KEY_ID = 'AKIATAHCQNJCJARIRYHN'
-    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_ACCESS_KEY_ID = ''
+    AWS_SECRET_ACCESS_KEY = ''
     AWS_STORAGE_BUCKET_NAME = 'being-momin-s3-bucket'
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
     AWS_S3_OBJECT_PARAMETERS = {

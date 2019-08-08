@@ -56,12 +56,15 @@ class news_room(models.Model):
     news_title = models.CharField(max_length=400)
     news_description = models.TextField()
     news_category = models.CharField(max_length=400)
+    tagged_persons = models.CharField(max_length=400)
     new_attachment = models.ImageField(upload_to='BeingMomin/media/images/news_attachment/', blank=True )
     verified  = models.BooleanField()
     currently_show = models.BooleanField()
     user = models.ForeignKey(User)
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True)
+    class Meta(object):
+        db_table = 'AmbassadorPortal_news_room'
 
 
 

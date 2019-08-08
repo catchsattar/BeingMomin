@@ -12,15 +12,15 @@ urlpatterns = [
     url(r'^search-person$', views.search_person, name="searchperson"),
     # url(r'^home$', views.home, name="home"),
     # url(r'^ambassadorhome$', views.amb_home, name="ambassadorhome"),
-     url(r'^add-person$', views.add_person, name="addperson"),
-     url(r'^get-localities$', views.get_localities, name="getlocalities"),
+    url(r'^add-person$', views.add_person, name="addperson"),
+    url(r'^add-news$', views.add_news, name="addnews"),
+    url(r'^get-current-news$', views.get_current_news, name="getcurrentnews"),
+    url(r'^get-localities$', views.get_localities, name="getlocalities"),
     # url(r'^searchparent$', views.get_parent, name="searchparent"),
-    # url(r'^newsenter$', views.news_entry, name="newsenter"),
     # url(r'^profile$', views.ambassador_profile, name="profile"),
-     url(r'^get-families$', views.get_families, name="families"),
-     url(r'^get-family-hierarchy$', views.get_family_hierarchy, name="get-familty-hierarchy"),
-     url(r'^get-detailed-person$', views.get_detailed_person, name="get-detailed-person")
-
+    url(r'^get-families$', views.get_families, name="families"),
+    url(r'^get-family-hierarchy$', views.get_family_hierarchy, name="get-familty-hierarchy"),
+    url(r'^get-detailed-person$', views.get_detailed_person, name="get-detailed-person")
 
 ]
 

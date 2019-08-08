@@ -29,48 +29,52 @@ def view_search_person(request):
         body_unicode = request.body.decode('utf-8')
         body = ast.literal_eval(body_unicode)
         search_name = body['searchName']
-        locality = body['locality']
+        localityId = body['localityId']
         gender = body['gender']
 
-        print("gender : "+gender)
-        print("locality : "+locality)
+        print("gender : " + gender)
+        print("localityId : " + localityId)
 
         response["Status"] = 0
 
-        con1= Q(name__icontains=search_name)
+        con1 = Q(name__icontains=search_name)
         con2 = Q(gender=gender)
-        con3 = Q(locality_id__locality_key= locality)
+        con3 = Q(locality_id=localityId)
 
-        if(locality.__len__()!=0 & gender.__len__()!=0 ):
-          persons_array = people.objects.filter(con1 & con2
-                                                & con3).values('id','name','locality__locality_key','father_id')
-        elif (locality.__len__() == 0 & gender.__len__() != 0):
-          persons_array = people.objects.filter(name__icontains=search_name, gender=gender).values('id', 'name','locality__locality_key','father_id')
-
-        elif (locality.__len__() != 0 & gender.__len__() == 0):
-            persons_array = people.objects.filter(name__icontains=search_name, locality_id__locality_key=locality).values('id', 'name', 'locality__locality_key','father_id')
-
-        elif (locality.__len__() == 0 & gender.__len__() == 0):
-            persons_array = people.objects.filter(name__icontains=search_name).values('id', 'name', 'locality__locality_key','father_id')
-
+        if (localityId >= 0 & gender.__len__() != 0):
+            persons_array = people.objects.filter(name__icontains=search_name, gender=gender,
+                                                     locality_id=localityId).values('id', 'name', 'locality__locality_key', 'father_id')
+        elif (localityId < 0 & gender.__len__() != 0):
+            persons_array = people.objects.filter(name__icontains=search_name, gender=gender).values('id', 'name',
+                                                                                                     'locality__locality_key',
+                                                                                                     'father_id')
+        elif (localityId >= 0 & gender.__len__() == 0):
+            persons_array = people.objects.filter(name__icontains=search_name,
+                                                  locality_id=localityId).values('id', 'name',
+                                                                                             'locality__locality_key',
+                                                                                             'father_id')
+        elif (localityId < 0 & gender.__len__() == 0):
+            persons_array = people.objects.filter(name__icontains=search_name).values('id', 'name',
+                                                                                      'locality__locality_key',
+                                                                                      'father_id')
         persons = []
         persons_list = list(persons_array)
 
         for person in persons_list:
 
-            if person["father_id"]==0:
-              father_name=""
+            if person["father_id"] == 0:
+                father_name = ""
             else:
-              father_name= get_person_from_id(person["father_id"]).name
+                father_name = get_person_from_id(person["father_id"]).name
             personDict = {
-                "id":person["id"],
+                "id": person["id"],
                 "name": person["name"],
-                "locality" : person["locality__locality_key"],
+                "locality": person["locality__locality_key"],
                 "father": father_name
             }
             persons.append(personDict)
 
-        response["persons"]=persons
+        response["persons"] = persons
 
     except Exception as e:
         response = {"Status": 1}

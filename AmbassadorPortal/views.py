@@ -8,6 +8,8 @@ from AmbassadorPortal.view.view_get_family_hierachy import view_get_family_hiera
 from AmbassadorPortal.view.view_get_families import view_get_families
 from AmbassadorPortal.view.view_get_localities import view_get_localities
 from view.view_add_person import view_add_person
+from view.view_add_news import view_add_news
+from view.view_get_current_news import view_get_current_news
 from view.view_sign_up_ambassador import view_sign_up_ambassador
 from view.view_locality_ambassadors import view_locality_ambassadors
 from view.view_search_person import view_search_person
@@ -39,6 +41,14 @@ def search_person(request):
 @csrf_exempt
 def add_person(request):
     return view_add_person(request)
+
+@csrf_exempt
+def add_news(request):
+    return view_add_news(request)
+
+@csrf_exempt
+def get_current_news(request):
+    return view_get_current_news(request)
 
 @csrf_exempt
 def get_localities(request):
