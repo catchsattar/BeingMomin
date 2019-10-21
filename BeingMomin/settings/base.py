@@ -104,7 +104,7 @@ WSGI_APPLICATION = 'BeingMomin.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-'default': {
+'defau': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_beingmomin',
         'USER': '',
@@ -112,7 +112,7 @@ DATABASES = {
         'HOST': '',
         'PORT': '3306',
     },
-    'dev': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_beingmomin',
         'USER': 'root',
@@ -165,10 +165,13 @@ if config.CURRENT_ENV == 'PRODUCTION':
         'CacheControl': 'max-age=86400',
     }
     AWS_LOCATION = 'static'
+    PROFILE_LOCATION = 'profiles'
 
     STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     DEFAULT_FILE_STORAGE = 'BeingMomin.settings.storage_backends.MediaStorage'
+    MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, PROFILE_LOCATION)
+    MEDIA_ROOT = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, PROFILE_LOCATION)
 
 else:
     STATICFILES_DIRS = ( os.path.join(BASE_DIR, "static"), )
