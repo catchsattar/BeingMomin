@@ -1,5 +1,5 @@
 adium-theme-ubuntu==0.3.4
-Django==1.11.20
+Django==1.11.29
 djangorestframework==3.9.2
 djangorestframework-jwt==1.11.0
 ecdsa==0.13
